@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CodeNames.Data;
+using CodeNamesProject.Data;
+using CodeNamesProject.Services;
 
-namespace CodeNames
+namespace CodeNamesProject
 {
     public class Startup
     {
@@ -29,6 +30,8 @@ namespace CodeNames
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<IRngService, DotNetRngService>();
+            services.AddTransient<IWordProvider, JsonWordProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

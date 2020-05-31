@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CodeNames.Data
+namespace CodeNamesProject.Data
 {
     public class WeatherForecastService
     {

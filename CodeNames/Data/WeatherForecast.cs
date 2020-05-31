@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeNames.Data
+namespace CodeNamesProject.Data
 {
     public class WeatherForecast
     {

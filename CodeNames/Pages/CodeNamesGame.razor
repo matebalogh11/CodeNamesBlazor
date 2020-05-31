@@ -1,0 +1,63 @@
+﻿@page "/codenamesgame"
+@using CodeNamesProject.Services
+@inject IWordProvider WordProvider
+
+
+<h2>Play some codenames with friends!</h2>
+<button class="btn-primary" @onclick="RefreshWords">Refresh</button>
+<br/>
+
+
+<div class="container">
+
+	@for (int i = 0; i < 5; i++)
+	{
+		<div class="row top-buffer">
+			@for (int j = 0; j < 5; j++)
+			{
+				var index = (i * 5) + j;
+				<div class="col-sm">
+					<div class="card" @onclick="(e => CardSelected(index))">
+						<div class="card-body">
+							<p class="table-hover">@WordList[index]</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	}
+</div>
+
+<br />
+
+@if (string.IsNullOrEmpty(SelectedCart))
+{
+	<p>Select a card!</p>
+}
+else
+{
+	<p>Selected card: @SelectedCart</p>
+}
+
+
+@code {     
+
+	List<string> WordList;
+	string SelectedCart;
+
+	protected override Task OnInitializedAsync()
+	{
+		WordList = WordProvider.GetWordListForGame().ToList();
+		return base.OnInitializedAsync();
+	}
+
+	private void CardSelected(int index)
+	{
+		SelectedCart = WordList[index];
+	}
+
+	private void RefreshWords()
+	{
+		WordList = WordProvider.GetWordListForGame().ToList();
+	}
+}
